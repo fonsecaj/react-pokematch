@@ -14,7 +14,8 @@ const CardShape = styled.button`
   justify-content: center;
   align-items: center;
   aspect-ratio: 1 / 1;
-  border: 1px solid #f1f1f1;
+  border: none;
+  appearance: none;
   cursor: pointer;
   font-size: 2em;
   background-color: transparent;

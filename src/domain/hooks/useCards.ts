@@ -1,11 +1,16 @@
 import { Card } from '@domain/types/Card';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type CardsController = {};
+type CardsController = {
+  shuffle: () => void;
+};
 
 export function useCards(): [Card[], CardsController] {
   const [cards, setCards] = useState<Card[]>([]);
+
+  const shuffle = useCallback(() => {
+    setCards(cards => cards.sort(() => Math.random() - 0.5));
+  }, []);
 
   useEffect(() => {
     const cards: Card[] = Array.from({ length: 12 }, (_, index) => ({
@@ -16,5 +21,5 @@ export function useCards(): [Card[], CardsController] {
     setCards(cards.sort(() => Math.random() - 0.5));
   }, []);
 
-  return [cards, {}];
+  return [cards, { shuffle }];
 }

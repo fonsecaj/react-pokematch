@@ -1,16 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import type { Dispatch, SetStateAction } from 'react';
-
 type TimerControllers = {
   start: () => void;
   stop: () => void;
   reset: () => void;
-  setTime: Dispatch<SetStateAction<number>>;
 };
 
-export function useTimer(initialValue?: number): [number, TimerControllers] {
-  const [time, setTime] = useState(initialValue ?? 0);
+export function useTimer(): [number, TimerControllers] {
+  const [time, setTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
   const start = useCallback(() => {
@@ -22,8 +19,8 @@ export function useTimer(initialValue?: number): [number, TimerControllers] {
   }, []);
 
   const reset = useCallback(() => {
-    setTime(initialValue ?? 0);
-  }, [initialValue]);
+    setTime(0);
+  }, []);
 
   useEffect(() => {
     let interval: number | undefined = undefined;
@@ -42,5 +39,5 @@ export function useTimer(initialValue?: number): [number, TimerControllers] {
     };
   }, [isActive]);
 
-  return [time, { start, stop, reset, setTime }];
+  return [time, { start, stop, reset }];
 }
