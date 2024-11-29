@@ -7,17 +7,9 @@ const InnerHeader = styled.header`
   padding: 16px 18px 16px 24px;
 `;
 
-const Brand = styled.a`
-  color: inherit;
-  text-decoration: none;
-  line-height: 28px;
-  padding-top: 6px;
-`;
-
 function Header({ children }: { children: React.ReactNode }) {
   return (
     <InnerHeader>
-      <Brand href="/">POKÉMATCH</Brand>
       {children}
     </InnerHeader>
   );

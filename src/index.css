@@ -7,11 +7,10 @@
   font-family: 'Pokemon GB', monospace;
   font-weight: 400;
   color: #000;
-  background-color: #ffffff;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #F9F9F9;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
 }
 
 :root[data-theme='dark'] {

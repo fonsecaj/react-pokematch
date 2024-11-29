@@ -1,15 +1,12 @@
-import Timer from '@ui/timer/Timer';
-import { useCards } from '@domain/hooks/useCards';
-import { useMatchingCards } from '@domain/hooks/useMatchingCards';
-import { useTimer } from '@domain/hooks/useTimer';
+import { useStore } from '@domain/hooks/useStore';
+import { PokemonFlipCard } from '@domain/models/PokemonFlipCard';
 import Box from '@ui/box/Box';
 import Card from '@ui/card/Card';
+import FlipCountdown from '@ui/flip-countdown/FlipCountdown';
 import Grid from '@ui/grid/Grid';
 import MenuItem from '@ui/menu-item/MenuItem';
+import { useMemo } from 'react';
 import styled from 'styled-components';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import FlipCountdown from '@ui/flip-countdown/FlipCountdown';
-import { Card as ICard } from '@domain/types/Card';
 
 const GameContainer = styled.div`
   display: grid;
@@ -26,84 +23,96 @@ const GameMessage = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 16px;
-
-
 `;
 
 function Game() {
-  const [flipCountdown, setFlipCountdown] = useState(30);
-  const [cards, { shuffle }] = useCards();
-  const [flippedCards, { flip, unflipAll }] = useMatchingCards();
-  const [time, { start, stop, reset }] = useTimer();
+  // const { gameStatus, leftFlips, cards, matchedCardIds, currentPairFlip, flip, startGame, exitGame } = useStore();
+  const gameStatus = useStore.use.gameStatus();
+  const leftFlips = useStore.use.leftFlips();
+  const cards = useStore.use.cards();
+  const matchedCardIds = useStore.use.matchedCardIds();
+  const currentPairFlip = useStore.use.currentPairFlip();
+  const flip = useStore.use.flip();
+  const startGame = useStore.use.startGame();
+  const exitGame = useStore.use.exitGame();
 
-  const canFlip = flippedCards.length < cards.length && flipCountdown > 0;
+  const flippedCardIds = useMemo(() => {
+    const currentPairFlipIds: PokemonFlipCard['id'][] = [];
 
-  const restart = useCallback(() => {
-    reset();
-    unflipAll();
-    setFlipCountdown(30);
-    shuffle();
-  }, [reset, unflipAll, setFlipCountdown, shuffle]);
+    if (currentPairFlip[0]) {
+      currentPairFlipIds.push(currentPairFlip[0].id);
+    }
 
-  const makeFlip = useCallback((card: ICard) => {
-    if (!canFlip) return;
+    if (currentPairFlip[1]) {
+      currentPairFlipIds.push(currentPairFlip[1].id);
+    }
 
-    flip(card);
-    setFlipCountdown(countdown => countdown - 1);
-  }, [flip, setFlipCountdown, canFlip]);
+    return [
+      ...matchedCardIds,
+      ...currentPairFlipIds,
+    ];
+  }, [matchedCardIds, currentPairFlip]);
 
-  const grid = useMemo(() => (
-    <>
-      <FlipCountdown value={flipCountdown} />
+  // const [flipCountdown, setFlipCountdown] = useState(30);
+  // const [cards, { shuffle }] = useCards();
+  // const [flippedCards, { flip, unflipAll }] = useMatchingCards();
+  // const [time, { start, stop, reset }] = useTimer();
+
+  // const canFlip = flippedCards.length < cards.length && flipCountdown > 0;
+
+  // const restart = useCallback(() => {
+  //   // reset();
+  //   unflipAll();
+  //   setFlipCountdown(30);
+  //   shuffle();
+  // }, [reset, unflipAll, setFlipCountdown, shuffle]);
+
+  // useEffect(() => {
+  //   if (canFlip) {
+  //     start();
+  //   }
+  //   else {
+  //     stop();
+  //   }
+  // }, [start, stop, canFlip]);
+
+  return (
+    <GameContainer>
+      {/* <Timer value={time} /> */}
+      <FlipCountdown value={leftFlips} />
       <Grid>
         {cards.map(card => (
           <Card
             key={card.id}
-            flipped={flippedCards.includes(card.id) || !canFlip}
-            onClick={() => makeFlip(card)}
+            flipped={flippedCardIds.includes(card.id) || gameStatus !== 'playing'}
+            onClick={() => flip(card)}
           >
             {card.name}
           </Card>
         ))}
-        {
-          flippedCards.length === cards.length
-            ? (
+        {(() => {
+          switch (gameStatus) {
+            case 'won':
+              return (
                 <GameMessage>
                   <p>You win!</p>
-                  <MenuItem onClick={restart}>Restart</MenuItem>
-                  <MenuItem>Exit</MenuItem>
+                  <MenuItem onClick={startGame}>Restart</MenuItem>
+                  <MenuItem onClick={exitGame}>Exit</MenuItem>
                 </GameMessage>
-              )
-            : null
-        }
-        {
-          !canFlip && flippedCards.length !== cards.length
-            ? (
+              );
+            case 'lost':
+              return (
                 <GameMessage>
                   <p>You lose!</p>
-                  <MenuItem onClick={restart}>Retry</MenuItem>
-                  <MenuItem>Exit</MenuItem>
+                  <MenuItem onClick={startGame}>Retry</MenuItem>
+                  <MenuItem onClick={exitGame}>Exit</MenuItem>
                 </GameMessage>
-              )
-            : null
-        }
+              );
+            default:
+              return null;
+          }
+        })()}
       </Grid>
-    </>
-  ), [cards, flippedCards, flipCountdown, canFlip, restart, makeFlip]);
-
-  useEffect(() => {
-    if (canFlip) {
-      start();
-    }
-    else {
-      stop();
-    }
-  }, [start, stop, canFlip]);
-
-  return (
-    <GameContainer>
-      <Timer value={time} />
-      {grid}
     </GameContainer>
   );
 }

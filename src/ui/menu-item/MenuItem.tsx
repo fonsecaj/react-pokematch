@@ -10,6 +10,7 @@ const MenuItem = styled.button`
   text-transform: uppercase;
   text-align: left;
   cursor: pointer;
+  line-height: 20px;
 
   &:hover:before {
     content: "";
