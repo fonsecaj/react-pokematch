@@ -1,3 +1,4 @@
+import PokemonSprite from '@domain/components/pokemon-sprite/PokemonSprite';
 import { useStore } from '@domain/hooks/useStore';
 import { PokemonFlipCard } from '@domain/models/PokemonFlipCard';
 import Box from '@ui/box/Box';
@@ -10,7 +11,7 @@ import styled from 'styled-components';
 
 const GameContainer = styled.div`
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto 1fr;
   gap: 1rem;
   padding: 8px 6px;
 `;
@@ -26,7 +27,6 @@ const GameMessage = styled(Box)`
 `;
 
 function Game() {
-  // const { gameStatus, leftFlips, cards, matchedCardIds, currentPairFlip, flip, startGame, exitGame } = useStore();
   const gameStatus = useStore.use.gameStatus();
   const leftFlips = useStore.use.leftFlips();
   const cards = useStore.use.cards();
@@ -35,6 +35,7 @@ function Game() {
   const flip = useStore.use.flip();
   const startGame = useStore.use.startGame();
   const exitGame = useStore.use.exitGame();
+  const forcePairValidity = useStore.use.forcePairValidity();
 
   const flippedCardIds = useMemo(() => {
     const currentPairFlipIds: PokemonFlipCard['id'][] = [];
@@ -53,41 +54,35 @@ function Game() {
     ];
   }, [matchedCardIds, currentPairFlip]);
 
-  // const [flipCountdown, setFlipCountdown] = useState(30);
-  // const [cards, { shuffle }] = useCards();
-  // const [flippedCards, { flip, unflipAll }] = useMatchingCards();
-  // const [time, { start, stop, reset }] = useTimer();
+  function handleStartGame() {
+    startGame();
+  }
 
-  // const canFlip = flippedCards.length < cards.length && flipCountdown > 0;
+  function handleExitGame() {
+    exitGame();
+  }
 
-  // const restart = useCallback(() => {
-  //   // reset();
-  //   unflipAll();
-  //   setFlipCountdown(30);
-  //   shuffle();
-  // }, [reset, unflipAll, setFlipCountdown, shuffle]);
+  function handleFlip(card: PokemonFlipCard) {
+    flip(card);
 
-  // useEffect(() => {
-  //   if (canFlip) {
-  //     start();
-  //   }
-  //   else {
-  //     stop();
-  //   }
-  // }, [start, stop, canFlip]);
+    if (currentPairFlip[0] !== null && currentPairFlip[1] === null && currentPairFlip[0].name !== card.name) {
+      setTimeout(() => {
+        forcePairValidity();
+      }, 1000);
+    }
+  }
 
   return (
     <GameContainer>
-      {/* <Timer value={time} /> */}
       <FlipCountdown value={leftFlips} />
       <Grid>
         {cards.map(card => (
           <Card
             key={card.id}
             flipped={flippedCardIds.includes(card.id) || gameStatus !== 'playing'}
-            onClick={() => flip(card)}
+            onClick={() => handleFlip(card)}
           >
-            {card.name}
+            <PokemonSprite name={card.name} />
           </Card>
         ))}
         {(() => {
@@ -96,16 +91,16 @@ function Game() {
               return (
                 <GameMessage>
                   <p>You win!</p>
-                  <MenuItem onClick={startGame}>Restart</MenuItem>
-                  <MenuItem onClick={exitGame}>Exit</MenuItem>
+                  <MenuItem onClick={handleStartGame}>Restart</MenuItem>
+                  <MenuItem onClick={handleExitGame}>Exit</MenuItem>
                 </GameMessage>
               );
             case 'lost':
               return (
                 <GameMessage>
                   <p>You lose!</p>
-                  <MenuItem onClick={startGame}>Retry</MenuItem>
-                  <MenuItem onClick={exitGame}>Exit</MenuItem>
+                  <MenuItem onClick={handleStartGame}>Retry</MenuItem>
+                  <MenuItem onClick={handleExitGame}>Exit</MenuItem>
                 </GameMessage>
               );
             default:

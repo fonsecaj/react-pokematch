@@ -8,7 +8,6 @@ type CardProps = {
 
 const CardShape = styled.button`
   position: relative;
-  padding: 1em;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -27,6 +26,9 @@ const CardInner = styled.div`
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CardFace = styled.div`
@@ -37,6 +39,17 @@ const CardFace = styled.div`
   left: 0;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CardBack = styled(CardFace)`
+  text-transform: uppercase;
+  text-align: left;
+  text-indent: -1000em;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjEuNWRHWFIAAABoSURBVChTnY0xFsAgDEJzBMde0DNk6OHTl4GUoungwFPhg3aNEanbfUaEqZCldlwB3Uj6rKOB9DumfgDEYYpL7QCX8daTM/aXVS1CyDQ3BhSCxxnKNfAH6Qg8zj9lho4HAEC77L37fADeSVIEvrov7gAAAABJRU5ErkJggg==) 1em center no-repeat;
+  background-size: 2rem;
 `;
 
 function Card({ flipped, onClick, children }: CardProps) {
@@ -46,9 +59,9 @@ function Card({ flipped, onClick, children }: CardProps) {
         <CardFace style={{ transform: 'rotateY(180deg)' }}>
           {children}
         </CardFace>
-        <CardFace>
-          ?
-        </CardFace>
+        <CardBack>
+          PKMN
+        </CardBack>
       </CardInner>
     </CardShape>
   );

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const InnerGrid = styled.div`
+const Grid = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -17,9 +17,5 @@ const InnerGrid = styled.div`
     height: 100%;
   }
 `;
-
-function Grid({ children }: { children: React.ReactNode }) {
-  return <InnerGrid>{children}</InnerGrid>;
-}
 
 export default Grid;

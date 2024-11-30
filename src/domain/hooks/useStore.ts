@@ -98,7 +98,13 @@ const useStoreBase = create(
         currentPairFlip,
       };
     }),
-    resetPairFlip: () => set({ currentPairFlip: [null, null] }),
+
+    forcePairValidity: () => set((state) => {
+      const isPair = state.currentPairFlip[0] !== null && state.currentPairFlip[1] !== null;
+      const invalidPair = isPair ? state.currentPairFlip[0]?.name !== state.currentPairFlip[1]?.name : false;
+
+      return { currentPairFlip: invalidPair ? [null, null] : state.currentPairFlip };
+    }),
   })),
 );
 

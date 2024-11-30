@@ -3,7 +3,7 @@ import { useDarkMode } from '@domain/hooks/useDarkMode';
 import Icon from '@ui/icon/Icon';
 import styled from 'styled-components';
 
-const IconButton = styled.button`
+const DarkModeToggleButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
@@ -12,7 +12,7 @@ const IconButton = styled.button`
 
 function DarkModeToggle() {
   const [isDarkMode, { enable, disable }] = useDarkMode();
-  const [audio, { play }] = useAudio('/click.mp3', { volume: 0.5 });
+  const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
 
   function handleClick() {
     play();
@@ -26,9 +26,9 @@ function DarkModeToggle() {
   }
 
   return (
-    <IconButton onClick={handleClick}>
+    <DarkModeToggleButton onClick={handleClick}>
       <Icon name={isDarkMode ? 'dark-mode' : 'light-mode'} />
-    </IconButton>
+    </DarkModeToggleButton>
   );
 }
 

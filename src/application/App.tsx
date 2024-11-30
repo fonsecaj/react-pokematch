@@ -1,11 +1,12 @@
-import DarkModeToggle from '@domain/features/dark-mode-toggle/DarkModeToggle';
+import DarkModeToggle from '@domain/components/dark-mode-toggle/DarkModeToggle';
 import Game from './pages/Game';
 
 import { useStore } from '@domain/hooks/useStore';
 import Header from '@ui/header/Header';
 import styled from 'styled-components';
 import Home from './pages/Home';
-import Timer from '@domain/features/timer/Timer';
+import Timer from '@domain/components/timer/Timer';
+import Audio from '@domain/components/audio/Audio';
 
 const Main = styled.main`
   height: 100%;
@@ -15,24 +16,28 @@ const Main = styled.main`
 `;
 
 const Brand = styled.a`
-color: inherit;
-text-decoration: none;
-line-height: 28px;
-padding-top: 6px;
+  color: inherit;
+  text-decoration: none;
+  line-height: 28px;
+  padding-top: 6px;
 `;
 
 function App() {
   const gameStatus = useStore.use.gameStatus();
 
   return (
-    <Main>
-      <Header>
-        {gameStatus === 'idle' ? <Brand href="/">POKÉMATCH</Brand> : <Timer />}
-        <DarkModeToggle />
-      </Header>
+    <>
+      <Main>
+        <Header>
+          {gameStatus === 'idle' ? <Brand href="/">POKÉMATCH</Brand> : <Timer />}
+          <DarkModeToggle />
+        </Header>
 
-      {gameStatus === 'idle' ? <Home /> : <Game />}
-    </Main>
+        {gameStatus === 'idle' ? <Home /> : <Game />}
+
+      </Main>
+      <Audio />
+    </>
   );
 }
 

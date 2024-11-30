@@ -1,10 +1,5 @@
 import { useStore } from '@domain/hooks/useStore';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-
-const TimerContainer = styled.div`
-  padding: 0;
-`;
 
 function Timer() {
   const gameStartedAt = useStore.use.gameStartedAt();
@@ -41,16 +36,16 @@ function Timer() {
 
   if (gameEndedAt === null) {
     return (
-      <TimerContainer>
+      <div>
         {formatTimerValue(gameStartedAt)}
-      </TimerContainer>
+      </div>
     );
   }
 
   return (
-    <TimerContainer>
+    <div>
       {formatTimerValue(gameStartedAt, gameEndedAt)}
-    </TimerContainer>
+    </div>
   );
 }
 

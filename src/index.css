@@ -11,6 +11,7 @@
   font-smooth: never;
   -webkit-font-smoothing: none;
   image-rendering: pixelated;
+  overflow: hidden;
 }
 
 :root[data-theme='dark'] {
@@ -23,9 +24,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }

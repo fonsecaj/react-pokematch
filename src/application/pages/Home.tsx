@@ -1,4 +1,3 @@
-import { useAudioAutoplay } from '@domain/hooks/useAudioAutoplay';
 import { useStore } from '@domain/hooks/useStore';
 import Box from '@ui/box/Box';
 import MenuItem from '@ui/menu-item/MenuItem';
@@ -34,11 +33,9 @@ const HomeMenu = styled(Box)`
 
 function Home() {
   const startGame = useStore.use.startGame();
-  const audio = useAudioAutoplay('/home.mp3', { volume: 0.5 });
 
   function handleNewGame() {
     startGame();
-    audio.pause();
   }
 
   return (
