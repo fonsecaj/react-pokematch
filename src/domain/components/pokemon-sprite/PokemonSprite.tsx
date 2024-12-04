@@ -14,6 +14,11 @@ const PokemonSpriteContainer = styled.div`
   height: 56px;
   background-image: url('/sprite.png');
   image-rendering: pixelated;
+  transform: scale(2);
+
+  @media only screen and (max-width: 600px) {
+    transform: none;
+  }
 `;
 
 function PokemonSprite({ name }: PokemonSpriteProps) {

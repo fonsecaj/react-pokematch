@@ -1,8 +1,9 @@
+import { POKEMON_SPRITE_COORDINATES } from '@domain/constants';
+import { useAudio } from '@domain/hooks/useAudio';
 import { useStore } from '@domain/hooks/useStore';
 import Box from '@ui/box/Box';
 import MenuItem from '@ui/menu-item/MenuItem';
-import Sprite from '@ui/sprite/Sprite';
-import { motion } from 'motion/react';
+import { motion, useTime, useTransform } from 'motion/react';
 import styled from 'styled-components';
 
 const HomeContainer = styled.div`
@@ -31,20 +32,37 @@ const HomeMenu = styled(Box)`
   width: 100%;
 `;
 
+const AnimatedSprite = styled(motion.div)`
+  display: inline-block;
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background-image: url('/sprite.png');
+  image-rendering: pixelated;
+  transform: scale(2);
+`;
+
 function Home() {
+  const allBackgroundPositions = Object.values(POKEMON_SPRITE_COORDINATES);
   const startGame = useStore.use.startGame();
+  const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
+  const time = useTime();
+  const backgroundPosition = useTransform(time, t => allBackgroundPositions[Math.floor(t / 500) % allBackgroundPositions.length]);
 
   function handleNewGame() {
+    play();
     startGame();
   }
 
   return (
     <HomeContainer>
       <HomeSpriteWrapper>
-        <Sprite name="all" scale={2} />
+        <AnimatedSprite
+          style={{ backgroundPosition }}
+        />
         <motion.img
           src="/pokeball.png"
-          alt="Pokématch"
+          alt="Pokéball"
           width="48"
           animate={{
             y: [0, 5, 5, 5, 0],
@@ -59,6 +77,7 @@ function Home() {
           }}
         />
       </HomeSpriteWrapper>
+
       <HomeMenu>
         <MenuItem onClick={handleNewGame}>New game</MenuItem>
       </HomeMenu>

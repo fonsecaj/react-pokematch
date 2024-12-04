@@ -1,10 +1,12 @@
+import { useMemo } from 'react';
 import styled from 'styled-components';
 
-type FlipCountdownProps = {
+type ProgressBarProps = {
   value: number;
+  max: number;
 };
 
-const FlipCountdownWrapper = styled.div`
+const ProgressBarContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -12,7 +14,7 @@ const FlipCountdownWrapper = styled.div`
   padding: 0 16px;
 `;
 
-const FlipCountdownInner = styled.div`
+const ProgressContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column-reverse;
@@ -20,7 +22,7 @@ const FlipCountdownInner = styled.div`
   gap: 12px;
   border-right: 4px solid #181010;
   border-bottom: 4px solid #181010;
-  width: 200px;
+  width: 50%;
   text-align: right;
   padding: 6px 8px;
   box-sizing: border-box;
@@ -40,7 +42,8 @@ const FlipCountdownInner = styled.div`
   }
 `;
 
-const FlipCountdownProgress = styled.progress`
+const Progress = styled.progress`
+  width: calc(100% - 16px);
   position: relative;
   height: 4px;
   border: 2px solid transparent;
@@ -66,17 +69,31 @@ const FlipCountdownProgress = styled.progress`
   }
 `;
 
-function FlipCountdown({ value }: FlipCountdownProps) {
+let uniqueId = 0;
+
+function ProgressBar({ value, max }: ProgressBarProps) {
+  const id = useMemo(() => {
+    uniqueId += 1;
+    return `progress-bar-${uniqueId}`;
+  }, []);
+
   return (
-    <FlipCountdownWrapper>
-      <FlipCountdownInner>
+    <ProgressBarContainer>
+      <ProgressContainer>
+        <label htmlFor={id}>
+          {value}/{max}
+        </label>
 
-        <label htmlFor="countdown">{value}/30</label>
-        <FlipCountdownProgress id="countdown" max="30" value={value}>{value}</FlipCountdownProgress>
-
-      </FlipCountdownInner>
-    </FlipCountdownWrapper>
+        <Progress
+          id={id}
+          max={max}
+          value={value}
+        >
+          {value}
+        </Progress>
+      </ProgressContainer>
+    </ProgressBarContainer>
   );
 }
 
-export default FlipCountdown;
+export default ProgressBar;

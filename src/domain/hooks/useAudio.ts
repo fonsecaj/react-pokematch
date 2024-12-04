@@ -22,8 +22,10 @@ export function useAudio(src: string, { volume = 1, playbackRate = 1 }: UseAudio
 
   const play = useCallback(() => {
     try {
-      audio.current.pause();
-      audio.current.currentTime = 0;
+      if (audio.current.currentTime > 0) {
+        audio.current.currentTime = 0;
+      }
+
       audio.current.play();
     }
     // eslint-disable-next-line no-empty

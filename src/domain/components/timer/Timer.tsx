@@ -7,7 +7,7 @@ function Timer() {
   const [now, setNow] = useState(gameStartedAt);
 
   function formatTimerValue(startTimestamp: number, timestamp = now) {
-    const diff = timestamp ? timestamp - startTimestamp : 0;
+    const diff = Math.max((timestamp ?? 0) - startTimestamp, 0);
     const value = Math.floor(diff / 100);
     const minutes = Math.floor(value / 600);
     const seconds = Math.floor((value % 600) / 10);

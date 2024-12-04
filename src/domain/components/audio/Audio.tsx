@@ -38,9 +38,7 @@ function Audio() {
   }
   , [gameStatus]);
 
-  useEffect(() => {
-    play();
-  }, [play]);
+  useEffect(() => play(), [play]);
 
   useEffect(() => {
     const playOnUserGestureCallback = () => {

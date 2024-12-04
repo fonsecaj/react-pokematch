@@ -1,1 +1,1 @@
-export const MAX_USER_FLIP_COUNT = 30;
+export const MAX_USER_FLIP_COUNT = 26;

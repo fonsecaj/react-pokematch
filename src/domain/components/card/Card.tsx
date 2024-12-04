@@ -50,6 +50,7 @@ const CardBack = styled(CardFace)`
   text-indent: -1000em;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjEuNWRHWFIAAABoSURBVChTnY0xFsAgDEJzBMde0DNk6OHTl4GUoungwFPhg3aNEanbfUaEqZCldlwB3Uj6rKOB9DumfgDEYYpL7QCX8daTM/aXVS1CyDQ3BhSCxxnKNfAH6Qg8zj9lho4HAEC77L37fADeSVIEvrov7gAAAABJRU5ErkJggg==) 1em center no-repeat;
   background-size: 2rem;
+  background-position: center;
 `;
 
 function Card({ flipped, onClick, children }: CardProps) {

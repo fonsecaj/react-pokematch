@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Home from './pages/Home';
 import Timer from '@domain/components/timer/Timer';
 import Audio from '@domain/components/audio/Audio';
+import AnimatedText from '@ui/animated-text/AnimatedText';
 
 const Main = styled.main`
   height: 100%;
@@ -29,7 +30,13 @@ function App() {
     <>
       <Main>
         <Header>
-          {gameStatus === 'idle' ? <Brand href="/">POKÉMATCH</Brand> : <Timer />}
+          {gameStatus === 'idle'
+            ? (
+                <Brand href="/">
+                  <AnimatedText text="POKÉMATCH" />
+                </Brand>
+              )
+            : <Timer />}
           <DarkModeToggle />
         </Header>
 
