@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { useAudio } from '@domain/hooks/useAudio';
+import { useSoundClick } from '@domain/hooks/useSoundClick';
 import { useStore } from '@domain/hooks/useStore';
 import AnimatedText from '@ui/animated-text/AnimatedText';
 import Box from '@ui/box/Box';
@@ -17,10 +17,10 @@ const Modal = styled(Box)`
 `;
 
 export default function EndGameModal() {
-  const gameStatus = useStore.use.gameStatus();
-  const startGame = useStore.use.startGame();
-  const exitGame = useStore.use.exitGame();
-  const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
+  const gameStatus = useStore((state) => state.gameStatus);
+  const startGame = useStore((state) => state.startGame);
+  const exitGame = useStore((state) => state.exitGame);
+  const { play } = useSoundClick();
 
   function handleChoice(newGame: boolean) {
     play();

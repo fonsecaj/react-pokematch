@@ -2,7 +2,7 @@ import { motion, useTime, useTransform } from 'motion/react';
 import styled from 'styled-components';
 
 import { POKEMON_SPRITE_COORDINATES } from '@domain/constants';
-import { useAudio } from '@domain/hooks/useAudio';
+import { useSoundClick } from '@domain/hooks/useSoundClick';
 import { useStore } from '@domain/hooks/useStore';
 import Box from '@ui/box/Box';
 import MenuItem from '@ui/menu-item/MenuItem';
@@ -45,8 +45,8 @@ const AnimatedSprite = styled(motion.div)`
 
 export default function Home() {
   const allBackgroundPositions = Object.values(POKEMON_SPRITE_COORDINATES);
-  const startGame = useStore.use.startGame();
-  const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
+  const startGame = useStore((state) => state.startGame);
+  const { play } = useSoundClick();
   const time = useTime();
   const backgroundPosition = useTransform(time, t => allBackgroundPositions[Math.floor(t / 500) % allBackgroundPositions.length]);
 

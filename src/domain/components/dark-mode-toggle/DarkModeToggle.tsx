@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { useAudio } from '@domain/hooks/useAudio';
 import { useDarkMode } from '@domain/hooks/useDarkMode';
+import { useSoundClick } from '@domain/hooks/useSoundClick';
 import Icon from '@ui/icon/Icon';
 
 const DarkModeToggleButton = styled.button`
@@ -13,7 +13,7 @@ const DarkModeToggleButton = styled.button`
 
 export default function DarkModeToggle() {
   const [isDarkMode, { enable, disable }] = useDarkMode();
-  const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
+  const { play } = useSoundClick();
 
   function handleClick() {
     play();

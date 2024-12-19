@@ -1,27 +1,10 @@
-import { create, StoreApi, UseBoundStore } from 'zustand';
+import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 
 import { CARD_COUNT, MAX_USER_FLIP_COUNT, POKEMON_NAMES } from '@domain/constants';
 import { GameStatus, LeftFlips, PokemonFlipCard } from '@domain/models';
 
 type NullableTuple<T> = [null, null] | [T, null] | [T, T];
-
-type WithSelectors<S> = S extends { getState: () => infer T }
-  ? S & { use: { [K in keyof T]: () => T[K] } }
-  : never;
-
-const createSelectors = <S extends UseBoundStore<StoreApi<object>>>(
-  _store: S,
-) => {
-  const store = _store as WithSelectors<typeof _store>;
-  store.use = {};
-  for (const k of Object.keys(store.getState())) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(store.use as any)[k] = () => store(s => s[k as keyof typeof s]);
-  }
-
-  return store;
-};
 
 type State = {
   gameStatus: GameStatus;
@@ -43,7 +26,7 @@ const initialState: State = {
   leftFlips: MAX_USER_FLIP_COUNT,
 };
 
-const useStoreBase = create(
+export const useStore = create(
   combine(initialState, set => ({
     startGame: () => set({
       ...initialState,
@@ -119,5 +102,3 @@ function generateCards(): PokemonFlipCard[] {
     }))
     .sort(() => Math.random() - 0.5);
 }
-
-export const useStore = createSelectors(useStoreBase);

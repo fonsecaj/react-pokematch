@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useStore } from '@domain/hooks/useStore';
 
 export default function Timer() {
-  const gameStartedAt = useStore.use.gameStartedAt();
-  const gameEndedAt = useStore.use.gameEndedAt();
+  const gameStartedAt = useStore(state => state.gameStartedAt);
+  const gameEndedAt = useStore(state => state.gameEndedAt);
   const [now, setNow] = useState(gameStartedAt);
 
   function formatTimerValue(startTimestamp: number, timestamp = now) {

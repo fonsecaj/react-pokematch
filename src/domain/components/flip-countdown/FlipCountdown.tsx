@@ -3,7 +3,7 @@ import { useStore } from '@domain/hooks/useStore';
 import ProgressBar from '@ui/progress-bar/ProgressBar';
 
 export default function FlipCountdown() {
-  const leftFlips = useStore.use.leftFlips();
+  const leftFlips = useStore(state => state.leftFlips);
   const maxFlips = MAX_USER_FLIP_COUNT;
 
   return (

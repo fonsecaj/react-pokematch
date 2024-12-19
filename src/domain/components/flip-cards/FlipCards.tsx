@@ -1,17 +1,17 @@
 import FlipCard from '@domain/components/flip-card/FlipCard';
-import { useAudio } from '@domain/hooks/useAudio';
+import { useSoundClick } from '@domain/hooks/useSoundClick';
 import { useStore } from '@domain/hooks/useStore';
 import { PokemonFlipCard } from '@domain/models';
 import Grid from '@ui/grid/Grid';
 
 export default function FlipCards() {
-  const gameStatus = useStore.use.gameStatus();
-  const cards = useStore.use.cards();
-  const matchedCardIds = useStore.use.matchedCardIds();
-  const [firstPairCard, secondPairCard] = useStore.use.currentPairFlip();
-  const flip = useStore.use.flip();
-  const forcePairValidity = useStore.use.forcePairValidity();
-  const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
+  const gameStatus = useStore(state => state.gameStatus);
+  const cards = useStore(state => state.cards);
+  const matchedCardIds = useStore(state => state.matchedCardIds);
+  const [firstPairCard, secondPairCard] = useStore(state => state.currentPairFlip);
+  const flip = useStore(state => state.flip);
+  const forcePairValidity = useStore(state => state.forcePairValidity);
+  const { play } = useSoundClick();
 
   function handleFlip(card: PokemonFlipCard) {
     play();
