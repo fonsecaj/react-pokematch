@@ -1,9 +1,10 @@
+import Card from '@domain/components/card/Card';
+import { useAudio } from '@domain/hooks/useAudio';
 import { useStore } from '@domain/hooks/useStore';
 import { PokemonFlipCard } from '@domain/models';
-import Card from '@domain/components/card/Card';
 import Grid from '@ui/grid/Grid';
+
 import PokemonSprite from '../pokemon-sprite/PokemonSprite';
-import { useAudio } from '@domain/hooks/useAudio';
 
 function FlipCards() {
   const gameStatus = useStore.use.gameStatus();

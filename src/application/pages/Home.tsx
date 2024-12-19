@@ -1,10 +1,11 @@
+import { motion, useTime, useTransform } from 'motion/react';
+import styled from 'styled-components';
+
 import { POKEMON_SPRITE_COORDINATES } from '@domain/constants';
 import { useAudio } from '@domain/hooks/useAudio';
 import { useStore } from '@domain/hooks/useStore';
 import Box from '@ui/box/Box';
 import MenuItem from '@ui/menu-item/MenuItem';
-import { motion, useTime, useTransform } from 'motion/react';
-import styled from 'styled-components';
 
 const HomeContainer = styled.div`
   height: 100%;

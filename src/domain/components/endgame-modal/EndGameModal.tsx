@@ -1,9 +1,10 @@
+import styled from 'styled-components';
+
 import { useAudio } from '@domain/hooks/useAudio';
 import { useStore } from '@domain/hooks/useStore';
 import AnimatedText from '@ui/animated-text/AnimatedText';
 import Box from '@ui/box/Box';
 import MenuItem from '@ui/menu-item/MenuItem';
-import styled from 'styled-components';
 
 const Modal = styled(Box)`
   position: absolute;

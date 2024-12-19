@@ -1,5 +1,6 @@
-import { useStore } from '@domain/hooks/useStore';
 import { useEffect, useState } from 'react';
+
+import { useStore } from '@domain/hooks/useStore';
 
 function Timer() {
   const gameStartedAt = useStore.use.gameStartedAt();

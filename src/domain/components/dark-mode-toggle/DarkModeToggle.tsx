@@ -1,7 +1,8 @@
+import styled from 'styled-components';
+
 import { useAudio } from '@domain/hooks/useAudio';
 import { useDarkMode } from '@domain/hooks/useDarkMode';
 import Icon from '@ui/icon/Icon';
-import styled from 'styled-components';
 
 const DarkModeToggleButton = styled.button`
   background: none;

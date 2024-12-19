@@ -1,5 +1,6 @@
-import { useStore } from '@domain/hooks/useStore';
 import { useCallback, useEffect, useRef } from 'react';
+
+import { useStore } from '@domain/hooks/useStore';
 
 function Audio() {
   const gameStatus = useStore.use.gameStatus();

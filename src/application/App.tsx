@@ -1,13 +1,14 @@
-import DarkModeToggle from '@domain/components/dark-mode-toggle/DarkModeToggle';
-import Game from './pages/Game';
-
-import { useStore } from '@domain/hooks/useStore';
-import Header from '@ui/header/Header';
 import styled from 'styled-components';
-import Home from './pages/Home';
-import Timer from '@domain/components/timer/Timer';
+
 import Audio from '@domain/components/audio/Audio';
+import DarkModeToggle from '@domain/components/dark-mode-toggle/DarkModeToggle';
+import Timer from '@domain/components/timer/Timer';
+import { useStore } from '@domain/hooks/useStore';
 import AnimatedText from '@ui/animated-text/AnimatedText';
+import Header from '@ui/header/Header';
+
+import Game from './pages/Game';
+import Home from './pages/Home';
 
 const Main = styled.main`
   height: 100%;

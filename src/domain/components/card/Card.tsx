@@ -53,7 +53,7 @@ const CardBack = styled(CardFace)`
   background-position: center;
 `;
 
-function Card({ flipped, onClick, children }: CardProps) {
+export default function Card({ flipped, onClick, children }: CardProps) {
   return (
     <CardShape disabled={flipped} onClick={onClick}>
       <CardInner style={{ transform: flipped ? 'rotateY(180deg)' : 'rotateY(0)' }}>
@@ -67,5 +67,3 @@ function Card({ flipped, onClick, children }: CardProps) {
     </CardShape>
   );
 }
-
-export default Card;
