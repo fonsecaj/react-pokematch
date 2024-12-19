@@ -10,7 +10,7 @@ const Grid = styled.div`
   border-width: 21px;
   border-style: solid;
   box-sizing: border-box;
-  padding: 8px;
+  padding: var(--spacing-sm);
 
   @media only screen and (max-width: 600px) {
     width:100%;

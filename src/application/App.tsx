@@ -20,7 +20,7 @@ const Brand = styled.a`
   color: inherit;
   text-decoration: none;
   line-height: 28px;
-  padding-top: 6px;
+  padding-top: var(--spacing-xs);
 `;
 
 function App() {

@@ -7,7 +7,7 @@ const GameContainer = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 1rem;
-  padding: 8px 6px;
+  padding: var(--spacing-sm) var(--spacing-xs);
 `;
 
 function Game() {

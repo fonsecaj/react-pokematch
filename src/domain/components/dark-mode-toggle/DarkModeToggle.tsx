@@ -7,7 +7,7 @@ const DarkModeToggleButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: var(--spacing-sm);
 `;
 
 function DarkModeToggle() {

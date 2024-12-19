@@ -4,10 +4,20 @@
 }
 
 :root {
+  --spacing-xs: 6px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 18px;
+  --spacing-xxl: 24px;
+  --spacing-xxxl: 32px;
+  --color-foreground: #181010;
+  --color-background: #F9F9F9;
+
   font-family: 'Pokemon GB', monospace;
   font-weight: 400;
-  color: #000;
-  background-color: #F9F9F9;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
   font-smooth: never;
   -webkit-font-smoothing: none;
   image-rendering: pixelated;

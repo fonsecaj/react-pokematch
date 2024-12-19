@@ -11,7 +11,7 @@ const ProgressBarContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 100%;
-  padding: 0 16px;
+  padding: 0 var(--spacing-lg);
 `;
 
 const ProgressContainer = styled.div`
@@ -19,12 +19,12 @@ const ProgressContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  gap: 12px;
-  border-right: 4px solid #181010;
-  border-bottom: 4px solid #181010;
+  gap: var(--spacing-md);
+  border-right: 4px solid var(--color-foreground);
+  border-bottom: 4px solid var(--color-foreground);
   width: 50%;
   text-align: right;
-  padding: 6px 8px;
+  padding: var(--spacing-xs) var(--spacing-sm);
   box-sizing: border-box;
 
 
@@ -37,13 +37,13 @@ const ProgressContainer = styled.div`
     width: 2px;
     height: 2px;
     font-size: 2px;
-    color: #181010;
-    box-shadow: 4em 1em #181010, 5em 1em #181010, 4em 0 #181010, 5em 0 #181010, 3em 0 #181010, 2em 0 #181010, 4em -1em #181010, 5em -1em #181010, -2em 2em #181010, -1em 2em #181010;
+    color: var(--color-foreground);
+    box-shadow: 4em 1em var(--color-foreground), 5em 1em var(--color-foreground), 4em 0 var(--color-foreground), 5em 0 var(--color-foreground), 3em 0 var(--color-foreground), 2em 0 var(--color-foreground), 4em -1em var(--color-foreground), 5em -1em var(--color-foreground), -2em 2em var(--color-foreground), -1em 2em var(--color-foreground);
   }
 `;
 
 const Progress = styled.progress`
-  width: calc(100% - 16px);
+  width: calc(100% - var(--spacing-lg));
   position: relative;
   height: 4px;
   border: 2px solid transparent;

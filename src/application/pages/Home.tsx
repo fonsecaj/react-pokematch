@@ -13,7 +13,7 @@ const HomeContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 64px;
-  padding: 8px 6px;
+  padding: var(--spacing-sm) var(--spacing-xs);
 `;
 
 const HomeSpriteWrapper = styled.div`
@@ -28,7 +28,7 @@ const HomeSpriteWrapper = styled.div`
 const HomeMenu = styled(Box)`
   display: flex;
   flex-direction: column;
-  padding: 16px 0 32px 0;
+  padding: var(--spacing-lg) 0 var(--spacing-xxxl) 0;
   width: 100%;
 `;
 

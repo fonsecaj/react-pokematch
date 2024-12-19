@@ -5,8 +5,8 @@ const Box = styled.div`
   border-width: 21px;
   border-style: solid;
   box-sizing: border-box;
-  padding: 8px;
-  background-color: #F9F9F9;
+  padding: var(--spacing-sm);
+  background-color: var(--color-background);
 `;
 
 export default Box;

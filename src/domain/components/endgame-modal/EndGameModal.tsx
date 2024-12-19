@@ -7,12 +7,12 @@ import styled from 'styled-components';
 
 const Modal = styled(Box)`
   position: absolute;
-  left: 6px;
-  right: 6px;
-  bottom: 5px;
+  left: var(--spacing-xs);
+  right: var(--spacing-xs);
+  bottom: calc(var(--spacing-xs) - 1px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-lg);
 `;
 
 function EndGameModal() {
