@@ -71,7 +71,7 @@ const Progress = styled.progress`
 
 let uniqueId = 0;
 
-function ProgressBar({ value, max }: ProgressBarProps) {
+export default function ProgressBar({ value, max }: ProgressBarProps) {
   const id = useMemo(() => {
     uniqueId += 1;
     return `progress-bar-${uniqueId}`;
@@ -95,5 +95,3 @@ function ProgressBar({ value, max }: ProgressBarProps) {
     </ProgressBarContainer>
   );
 }
-
-export default ProgressBar;

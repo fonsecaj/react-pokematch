@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useStore } from '@domain/hooks/useStore';
 
-function Timer() {
+export default function Timer() {
   const gameStartedAt = useStore.use.gameStartedAt();
   const gameEndedAt = useStore.use.gameEndedAt();
   const [now, setNow] = useState(gameStartedAt);
@@ -49,5 +49,3 @@ function Timer() {
     </div>
   );
 }
-
-export default Timer;

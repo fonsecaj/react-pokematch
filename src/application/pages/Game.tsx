@@ -11,7 +11,7 @@ const GameContainer = styled.div`
   padding: var(--spacing-sm) var(--spacing-xs);
 `;
 
-function Game() {
+export default function Game() {
   return (
     <GameContainer>
       <FlipCountdown />
@@ -20,5 +20,3 @@ function Game() {
     </GameContainer>
   );
 }
-
-export default Game;

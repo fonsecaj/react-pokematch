@@ -24,7 +24,7 @@ const Brand = styled.a`
   padding-top: var(--spacing-xs);
 `;
 
-function App() {
+export default function App() {
   const gameStatus = useStore.use.gameStatus();
 
   return (
@@ -48,5 +48,3 @@ function App() {
     </>
   );
 }
-
-export default App;

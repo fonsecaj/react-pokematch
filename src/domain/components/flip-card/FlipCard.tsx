@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-type CardProps = {
+import { POKEMON_SPRITE_COORDINATES } from '@domain/constants';
+import { PokemonFlipCard } from '@domain/models';
+
+type FlipCardProps = {
+  name: PokemonFlipCard['name'];
   flipped: boolean;
   onClick: () => void;
-  children: React.ReactNode;
 };
 
 const CardShape = styled.button`
@@ -53,12 +56,26 @@ const CardBack = styled(CardFace)`
   background-position: center;
 `;
 
-export default function Card({ flipped, onClick, children }: CardProps) {
+const PokemonSprite = styled.div`
+  display: inline-block;
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background-image: url('/sprite.png');
+  image-rendering: pixelated;
+  transform: scale(2);
+
+  @media only screen and (max-width: 600px) {
+    transform: none;
+  }
+`;
+
+export default function FlipCard({ flipped, onClick, name }: FlipCardProps) {
   return (
     <CardShape disabled={flipped} onClick={onClick}>
       <CardInner style={{ transform: flipped ? 'rotateY(180deg)' : 'rotateY(0)' }}>
         <CardFace style={{ transform: 'rotateY(180deg)' }}>
-          {children}
+          <PokemonSprite style={{ backgroundPosition: POKEMON_SPRITE_COORDINATES[name] }} />
         </CardFace>
         <CardBack>
           PKMN

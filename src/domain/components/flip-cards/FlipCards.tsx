@@ -1,12 +1,10 @@
-import Card from '@domain/components/card/Card';
+import FlipCard from '@domain/components/flip-card/FlipCard';
 import { useAudio } from '@domain/hooks/useAudio';
 import { useStore } from '@domain/hooks/useStore';
 import { PokemonFlipCard } from '@domain/models';
 import Grid from '@ui/grid/Grid';
 
-import PokemonSprite from '../pokemon-sprite/PokemonSprite';
-
-function FlipCards() {
+export default function FlipCards() {
   const gameStatus = useStore.use.gameStatus();
   const cards = useStore.use.cards();
   const matchedCardIds = useStore.use.matchedCardIds();
@@ -29,15 +27,13 @@ function FlipCards() {
   return (
     <Grid>
       {cards.map(card => (
-        <Card
+        <FlipCard
+          name={card.name}
           key={card.id}
           flipped={gameStatus !== 'playing' || matchedCardIds.includes(card.id) || firstPairCard === card || secondPairCard === card}
           onClick={() => handleFlip(card)}
-        >
-          <PokemonSprite name={card.name} />
-        </Card>
+        />
       ))}
     </Grid>
   );
 }
-export default FlipCards;

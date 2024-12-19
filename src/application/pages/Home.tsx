@@ -43,7 +43,7 @@ const AnimatedSprite = styled(motion.div)`
   transform: scale(2);
 `;
 
-function Home() {
+export default function Home() {
   const allBackgroundPositions = Object.values(POKEMON_SPRITE_COORDINATES);
   const startGame = useStore.use.startGame();
   const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
@@ -85,5 +85,3 @@ function Home() {
     </HomeContainer>
   );
 }
-
-export default Home;

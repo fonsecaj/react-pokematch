@@ -5,7 +5,7 @@ type IconProps = {
   name: 'sound-off' | 'sound-on' | 'dark-mode' | 'light-mode';
 };
 
-function Icon({ name }: IconProps) {
+export default function Icon({ name }: IconProps) {
   switch (name) {
     case 'light-mode':
       return <LightIcon />;
@@ -17,5 +17,3 @@ function Icon({ name }: IconProps) {
       return null;
   }
 }
-
-export default Icon;

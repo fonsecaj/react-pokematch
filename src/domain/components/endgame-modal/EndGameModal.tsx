@@ -16,7 +16,7 @@ const Modal = styled(Box)`
   gap: var(--spacing-lg);
 `;
 
-function EndGameModal() {
+export default function EndGameModal() {
   const gameStatus = useStore.use.gameStatus();
   const startGame = useStore.use.startGame();
   const exitGame = useStore.use.exitGame();
@@ -58,5 +58,3 @@ function EndGameModal() {
       return null;
   }
 }
-
-export default EndGameModal;

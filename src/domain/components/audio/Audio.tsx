@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { useStore } from '@domain/hooks/useStore';
 
-function Audio() {
-  const gameStatus = useStore.use.gameStatus();
+export default function Audio() {
+  const gameStatus = useStore(state => state.gameStatus);
   const ref = useRef<HTMLAudioElement>(null);
 
   const play = useCallback(() => {
@@ -67,5 +67,3 @@ function Audio() {
     <audio ref={ref} />
   );
 }
-
-export default Audio;

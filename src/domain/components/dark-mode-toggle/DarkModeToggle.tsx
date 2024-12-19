@@ -11,7 +11,7 @@ const DarkModeToggleButton = styled.button`
   padding: var(--spacing-sm);
 `;
 
-function DarkModeToggle() {
+export default function DarkModeToggle() {
   const [isDarkMode, { enable, disable }] = useDarkMode();
   const [, { play }] = useAudio('/click.mp3', { volume: 0.5 });
 
@@ -32,5 +32,3 @@ function DarkModeToggle() {
     </DarkModeToggleButton>
   );
 }
-
-export default DarkModeToggle;
