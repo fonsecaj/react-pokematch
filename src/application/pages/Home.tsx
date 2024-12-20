@@ -45,7 +45,7 @@ const AnimatedSprite = styled(motion.div)`
 
 export default function Home() {
   const allBackgroundPositions = Object.values(POKEMON_SPRITE_COORDINATES);
-  const startGame = useStore((state) => state.startGame);
+  const startGame = useStore(state => state.startGame);
   const { play } = useSoundClick();
   const time = useTime();
   const backgroundPosition = useTransform(time, t => allBackgroundPositions[Math.floor(t / 500) % allBackgroundPositions.length]);

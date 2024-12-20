@@ -9,6 +9,8 @@ const DarkModeToggleButton = styled.button`
   border: none;
   cursor: pointer;
   padding: var(--spacing-sm);
+  appearance: none;
+  color: var(--color-foreground);
 `;
 
 export default function DarkModeToggle() {

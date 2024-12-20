@@ -17,9 +17,9 @@ const Modal = styled(Box)`
 `;
 
 export default function EndGameModal() {
-  const gameStatus = useStore((state) => state.gameStatus);
-  const startGame = useStore((state) => state.startGame);
-  const exitGame = useStore((state) => state.exitGame);
+  const gameStatus = useStore(state => state.gameStatus);
+  const startGame = useStore(state => state.startGame);
+  const exitGame = useStore(state => state.exitGame);
   const { play } = useSoundClick();
 
   function handleChoice(newGame: boolean) {

@@ -25,7 +25,7 @@ const Brand = styled.a`
 `;
 
 export default function App() {
-  const gameStatus = useStore((state) => state.gameStatus);
+  const gameStatus = useStore(state => state.gameStatus);
 
   return (
     <>

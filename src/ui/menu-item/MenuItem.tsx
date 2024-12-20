@@ -11,6 +11,8 @@ const MenuItem = styled.button`
   text-align: left;
   cursor: pointer;
   line-height: 20px;
+  appearance: none;
+  color: var(--color-foreground);
 
   &:hover:before {
     content: "";
